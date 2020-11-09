@@ -2,18 +2,30 @@ import valid from "card-validator";
 import { removeNonNumber, removeLeadingSpaces } from "./Utilities";
 import pick from "lodash.pick";
 
+var canCall = true
 const limitLength = (string = "", maxLength) => string.substr(0, maxLength);
 const addGaps = (string = "", gaps) => {
-  const offsets = [0].concat(gaps).concat([string.length]);
+  if (canCall) {
+    canCall = false;
+    
+    setTimeout(() => {
+      canCall = true
+    }, 500)
+    
+    return string.replace(/[ ]/gi, '').replace(/(.{4})/g, '$1 ');
+  } else {
+    return string;
+  }
+  // const offsets = [0].concat(gaps).concat([string.length]);
 
-  return offsets.map((end, index) => {
-    if (index === 0) return "";
-    const start = offsets[index - 1];
-    return string.substr(start, end - start);
-  }).filter(part => part !== "").join(" ");
+  // return offsets.map((end, index) => {
+  //   if (index === 0) return "";
+  //   const start = offsets[index - 1];
+  //   return string.substr(start, end - start);
+  // }).filter(part => part !== "").join(" ");
 };
 
-const FALLBACK_CARD = { gaps: [4, 8, 12], lengths: [16], code: { size: 3 } };
+const FALLBACK_CARD = { gaps: [4, 8, 12], lengths: [19], code: { size: 3 } };
 export default class CCFieldFormatter {
   constructor(displayedFields) {
     this._displayedFields = [...displayedFields, "type"];
@@ -21,6 +33,8 @@ export default class CCFieldFormatter {
 
   formatValues = (values) => {
     const card = valid.number(values.number).card || FALLBACK_CARD;
+
+    console.log("CARD: " + JSON.stringify(card))
 
     return pick({
       type: card.type,
@@ -33,7 +47,9 @@ export default class CCFieldFormatter {
   };
 
   _formatNumber = (number, card) => {
-    const numberSanitized = removeNonNumber(number);
+    //const numberSanitized = removeNonNumber(number);
+    const numberSanitized = removeLeadingSpaces(number);
+    // const numberSanitized = removeCard(number);
     const maxLength = card.lengths[card.lengths.length - 1];
     const lengthSanitized = limitLength(numberSanitized, maxLength);
     const formatted = addGaps(lengthSanitized, card.gaps);

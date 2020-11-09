@@ -11,6 +11,7 @@ import {
 
 import defaultIcons from "./Icons";
 import FlipCard from "react-native-flip-card";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const BASE_SIZE = { width: 300, height: 190 };
 
@@ -37,41 +38,41 @@ const s = StyleSheet.create({
     color: "rgba(255, 255, 255, 1)",
   },
   number: {
-    fontSize: 21,
+    fontSize: RFValue(18, 700),
     position: "absolute",
     top: 95,
     left: 28,
   },
   name: {
-    fontSize: 16,
+    fontSize: RFValue(13),
     position: "absolute",
     bottom: 20,
     left: 25,
     right: 100,
   },
   expiryLabel: {
-    fontSize: 9,
+    fontSize: RFValue(9),
     position: "absolute",
     bottom: 40,
     left: 218,
   },
   expiry: {
-    fontSize: 16,
+    fontSize: RFValue(14),
     position: "absolute",
     bottom: 20,
     left: 220,
   },
   amexCVC: {
-    fontSize: 16,
+    fontSize: RFValue(14),
     position: "absolute",
     top: 73,
     right: 30,
   },
   cvc: {
-    fontSize: 16,
+    fontSize: RFValue(14),
     position: "absolute",
     top: 80,
-    right: 30,
+    right: 30
   },
 });
 
@@ -98,15 +99,15 @@ export default class CardView extends Component {
     name: "",
     placeholder: {
       number: "•••• •••• •••• ••••",
-      name: "FULL NAME",
+      name: "NOME NO CARTÃO",
       expiry: "••/••",
       cvc: "•••",
     },
 
     scale: 1,
     fontFamily: Platform.select({ ios: "Courier", android: "monospace" }),
-    imageFront: require("../images/card-front.png"),
-    imageBack: require("../images/card-back.png"),
+    imageFront: require("../../../app/assets/card-front.png"),
+    imageBack: require("../../../app/assets/card-back.png"),
   };
 
   render() {
@@ -145,7 +146,7 @@ export default class CardView extends Component {
                 { !name ? placeholder.name : name.toUpperCase() }
               </Text>
               <Text style={[s.baseText, { fontFamily }, s.expiryLabel, s.placeholder, focused === "expiry" && s.focused]}>
-                MONTH/YEAR
+                VÁLIDO ATÉ
               </Text>
               <Text style={[s.baseText, { fontFamily }, s.expiry, !expiry && s.placeholder, focused === "expiry" && s.focused]}>
                 { !expiry ? placeholder.expiry : expiry }
@@ -157,7 +158,7 @@ export default class CardView extends Component {
           </ImageBackground>
           <ImageBackground style={[BASE_SIZE, s.cardFace, transform]}
             source={imageBack}>
-              <Text style={[s.baseText, s.cvc, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
+              <Text style={[s.baseText, s.cvc, !cvc && s.placeholder, focused === "cvc" && s.focused, {color: '#000'}]}>
                 { !cvc ? placeholder.cvc : cvc }
               </Text>
           </ImageBackground>
