@@ -1,6 +1,6 @@
 {
   "_from": "git+https://github.com/MatheusOliveira10/react-native-credit-card-input.git",
-  "_id": "react-native-credit-card-input@0.4.1",
+  "_id": "react-native-credit-card-input@0.4.2",
   "_inBundle": false,
   "_integrity": "",
   "_location": "/react-native-credit-card-input",
@@ -74,5 +74,5 @@
     "lint": "eslint --ext .js .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "0.4.1"
+  "version": "0.4.2"
 }
