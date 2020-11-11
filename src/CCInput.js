@@ -70,7 +70,7 @@ export default class CCInput extends Component {
     const { label, value, placeholder, status, keyboardType,
             containerStyle, inputStyle, labelStyle,
             validColor, invalidColor, placeholderColor,
-            additionalInputProps } = this.props;
+            additionalInputProps, editable } = this.props;
     return (
       <TouchableOpacity onPress={this.focus}
         activeOpacity={0.99}>
@@ -85,7 +85,7 @@ export default class CCInput extends Component {
               s.baseInputStyle,
               inputStyle,
               ((validColor && status === "valid") ? { color: validColor } :
-              (invalidColor && status === "invalid") ? { color: invalidColor } :
+              (invalidColor && status === "invalid" && value[0] != '*') ? { color: invalidColor } :
               {}),
             ]}
             underlineColorAndroid={"transparent"}
@@ -93,7 +93,8 @@ export default class CCInput extends Component {
             placeholder={placeholder}
             value={value}
             onFocus={this._onFocus}
-            onChangeText={this._onChange} />
+            onChangeText={this._onChange}
+            editable={editable} />
         </View>
       </TouchableOpacity>
     );

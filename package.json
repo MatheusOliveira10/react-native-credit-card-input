@@ -7,19 +7,18 @@
   "_phantomChildren": {},
   "_requested": {
     "type": "git",
-    "raw": "react-native-credit-card-input@git+https://github.com/MatheusOliveira10/react-native-credit-card-input.git",
-    "name": "react-native-credit-card-input",
-    "escapedName": "react-native-credit-card-input",
+    "raw": "git+https://github.com/MatheusOliveira10/react-native-credit-card-input.git",
     "rawSpec": "git+https://github.com/MatheusOliveira10/react-native-credit-card-input.git",
     "saveSpec": "git+https://github.com/MatheusOliveira10/react-native-credit-card-input.git",
     "fetchSpec": "https://github.com/MatheusOliveira10/react-native-credit-card-input.git",
     "gitCommittish": null
   },
   "_requiredBy": [
+    "#USER",
     "/"
   ],
-  "_resolved": "git+https://github.com/MatheusOliveira10/react-native-credit-card-input.git#c731ce17081e6faa9af8ff51b5ef779698ae939d",
-  "_spec": "react-native-credit-card-input@git+https://github.com/MatheusOliveira10/react-native-credit-card-input.git",
+  "_resolved": "git+https://github.com/MatheusOliveira10/react-native-credit-card-input.git#25491ada6a7a3351bed278f9acc88a04346065a1",
+  "_spec": "git+https://github.com/MatheusOliveira10/react-native-credit-card-input.git",
   "_where": "/home/matheuso/reactnative_neolink",
   "author": {
     "name": "Matheus Oliveira"

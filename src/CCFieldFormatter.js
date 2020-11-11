@@ -34,8 +34,6 @@ export default class CCFieldFormatter {
   formatValues = (values) => {
     const card = valid.number(values.number).card || FALLBACK_CARD;
 
-    console.log("CARD: " + JSON.stringify(card))
-
     return pick({
       type: card.type,
       number: this._formatNumber(values.number, card),
