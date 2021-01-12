@@ -63,7 +63,6 @@ export default function connectToState(CreditCardInput) {
       formattedValues = newValues.number[0] == '*' ? {...formattedValues, type: newValues.type} : formattedValues
       const validation = (new CCFieldValidator(displayedFields, this.props.validatePostalCode)).validateValues(formattedValues);
       const newState = { values: formattedValues, ...validation };
-
       this.setState(newState);
       this.props.onChange(newState);
     };
@@ -77,6 +76,7 @@ export default function connectToState(CreditCardInput) {
       return compact([
         "number",
         "expiry",
+        "doc",
         requiresCVC ? "cvc" : null,
         requiresName ? "name" : null,
         requiresPostalCode ? "postalCode" : null,

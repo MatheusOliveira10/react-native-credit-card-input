@@ -1,5 +1,5 @@
 import valid from "card-validator";
-import { removeNonNumber, removeLeadingSpaces } from "./Utilities";
+import { removeNonNumber, removeLeadingSpaces, formataCPFCNPJ } from "./Utilities";
 import pick from "lodash.pick";
 
 var canCall = true
@@ -33,7 +33,6 @@ export default class CCFieldFormatter {
 
   formatValues = (values) => {
     const card = valid.number(values.number).card || FALLBACK_CARD;
-
     return pick({
       type: card.type,
       number: this._formatNumber(values.number, card),
@@ -41,6 +40,7 @@ export default class CCFieldFormatter {
       cvc: this._formatCVC(values.cvc, card),
       name: removeLeadingSpaces(values.name),
       postalCode: removeNonNumber(values.postalCode),
+      doc: !formataCPFCNPJ(values.doc) ? '' : formataCPFCNPJ(removeNonNumber(values.doc)) 
     }, this._displayedFields);
   };
 

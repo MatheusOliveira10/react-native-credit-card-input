@@ -38,6 +38,7 @@ const EXPIRY_INPUT_WIDTH = CVC_INPUT_WIDTH;
 const CARD_NUMBER_INPUT_WIDTH_OFFSET = 40;
 const CARD_NUMBER_INPUT_WIDTH = Dimensions.get("window").width - EXPIRY_INPUT_WIDTH - CARD_NUMBER_INPUT_WIDTH_OFFSET;
 const NAME_INPUT_WIDTH = CARD_NUMBER_INPUT_WIDTH;
+const DOCUMENT_INPUT_WIDTH = CARD_NUMBER_INPUT_WIDTH;
 const PREVIOUS_FIELD_OFFSET = 40;
 const POSTAL_CODE_INPUT_WIDTH = 120;
 
@@ -75,6 +76,7 @@ export default class CreditCardInput extends Component {
       expiry: "EXPIRY",
       cvc: "CVC/CCV",
       postalCode: "POSTAL CODE",
+      doc: "CPF/CNPJ DO TITULAR",
     },
     placeholders: {
       name: "Full Name",
@@ -82,6 +84,7 @@ export default class CreditCardInput extends Component {
       expiry: "MM/YY",
       cvc: "CVC",
       postalCode: "34567",
+      doc: "CPF/CNPJ DO TITULAR",
     },
     inputContainerStyle: {
       borderBottomWidth: 1,
@@ -142,7 +145,7 @@ export default class CreditCardInput extends Component {
   render() {
     const {
       cardImageFront, cardImageBack, inputContainerStyle,
-      values: { number, expiry, cvc, name, type }, focused,
+      values: { number, expiry, cvc, name, type, doc }, focused,
       allowScroll, requiresName, requiresCVC, requiresPostalCode,
       cardScale, cardFontFamily, cardBrandIcons, editable
     } = this.props;
@@ -159,7 +162,8 @@ export default class CreditCardInput extends Component {
           name={requiresName ? name : " "}
           number={number}
           expiry={expiry}
-          cvc={cvc} />
+          cvc={cvc}
+          doc={doc} />
         <ScrollView ref="Form"
           horizontal
           keyboardShouldPersistTaps="always"
@@ -167,9 +171,13 @@ export default class CreditCardInput extends Component {
           showsHorizontalScrollIndicator={false}
           style={s.form}>
           <CCInput {...this._inputProps("number")}
-            //keyboardType="numeric"
+            keyboardType="numeric"
             editable={editable}
             containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]} />
+          {requiresName &&
+            <CCInput {...this._inputProps("name")}
+              editable={editable}
+              containerStyle={[s.inputContainer, inputContainerStyle, { width: NAME_INPUT_WIDTH }]} />}
           <CCInput {...this._inputProps("expiry")}
             keyboardType="numeric"
             editable={editable}
@@ -179,15 +187,15 @@ export default class CreditCardInput extends Component {
               keyboardType="numeric"
               editable={editable}
               containerStyle={[s.inputContainer, inputContainerStyle, { width: CVC_INPUT_WIDTH }]} />}
-          {requiresName &&
-            <CCInput {...this._inputProps("name")}
-              editable={editable}
-              containerStyle={[s.inputContainer, inputContainerStyle, { width: NAME_INPUT_WIDTH }]} />}
           {requiresPostalCode &&
             <CCInput {...this._inputProps("postalCode")}
               keyboardType="numeric"
               editable={editable}
               containerStyle={[s.inputContainer, inputContainerStyle, { width: POSTAL_CODE_INPUT_WIDTH }]} />}
+          <CCInput {...this._inputProps("doc")}
+            keyboardType="numeric"
+            editable={editable}
+            containerStyle={[s.inputContainer, inputContainerStyle, { width: DOCUMENT_INPUT_WIDTH }]} />
         </ScrollView>
       </View>
     );
