@@ -48,7 +48,8 @@ export default class CCFieldFormatter {
     //const numberSanitized = removeNonNumber(number);
     const numberSanitized = removeLeadingSpaces(number);
     // const numberSanitized = removeCard(number);
-    const maxLength = card.lengths[card.lengths.length - 1];
+    // const maxLength = card.lengths[card.lengths.length - 1];
+    const maxLength = 19;
     const lengthSanitized = limitLength(numberSanitized, maxLength);
     const formatted = addGaps(lengthSanitized, card.gaps);
     return formatted;
